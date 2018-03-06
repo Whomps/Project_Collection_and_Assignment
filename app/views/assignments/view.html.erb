@@ -1,0 +1,73 @@
+<% provide(:title, 'Project Assignment Details') %>
+<h1>Assignment Details</h1>
+<div class="row">
+<div class="col-md-10 col-md-offset-1">
+
+  <%= button_to "Clear All Assignments",  clear_all_data_path(),
+                                  data: { confirm: "Are you sure you want to reset all assignments?" }, :class => "btn btn-danger" %>
+    
+
+	<br><br>
+	<table>
+	<tr>
+		<div class="col-md-6">
+    		<th>Project Title</th>
+  		</div>
+
+  		<div class="col-md-3">
+  	  		<th>Team Assignment</th>
+		</div>
+		<div class="col-md-1">
+  	  		<th>Preference</th>
+		</div>
+
+		<div class="col-md-1">
+  	  		<th>Delete</th>
+		</div>
+	</tr>
+
+	<% for i in 0..(@assignments.size-1)%>
+	  	<tr>
+	  		<td class="col-md-6">
+	  			<a href="projects/<%=@assignments[i][:project_id]%>">
+	  			<%=@assignments[i][:project_title]%>
+	  			</a>
+	  		</td>
+	  		<td class="col-md-3">
+	  			<a href="teams/<%=@assignments[i][:team_id]%>">
+	  			<%= @assignments[i][:team_name]%>
+	  			</a>
+	  		</td>
+	  		<td class="col-md-1">
+	  			<% pref = Preference.find_by(team_id: @assignments[i][:team_id], project_id: @assignments[i][:project_id]) %>
+	  			<% pref_name = {-1 => "Bottom", 0 => "Neutral", 1 => "Top"} %>
+	  			<% if pref %>
+	  				<%= pref_name[pref.value] %>
+	  			<% else %>
+	  				<%= pref_name[0] %>
+	  			<% end %>
+	  		</td>
+			<td>
+
+				<%= button_to "Delete Assignment", {action: "delete", team_id: @assignments[i][:team_id], project_id: @assignments[i][:project_id]} %>
+			</td>
+	  	</tr>
+  	<% end %>
+</table>
+</div>
+</div>
+<br> <br>
+<h3>Assign Project</h3>
+
+
+
+<%= form_tag({action: :add}) do %>
+	<%= select_tag(:project_title, options_for_select(@project_names)) %>
+	<%= select_tag(:team_name, options_for_select(@team_names)) %>
+<%=	submit_tag("Add Assignment") %>
+
+
+
+
+<% end %>
+

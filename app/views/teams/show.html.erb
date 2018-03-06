@@ -1,0 +1,67 @@
+<% provide(:title, 'Team Details') %>
+<h1>Team Details</h1>
+
+<% if @team.is_leader?(current_user) || current_user.admin? %>
+<h2><%= link_to "Edit", edit_team_path(@team) %>
+  | <%= link_to "Delete", @team, method: :delete,
+                                data: { confirm: "You sure?" } %>
+</h2>
+<% end %>
+<% if current_user.is_member?(@team) %><%# && !@team.is_leader?(current_user) %>
+  <% r = Relationship.find_by(user_id: current_user.id, team_id: @team.id) %>
+    <h2><%= link_to "Leave Team", r, method: :delete,
+                                data: { confirm: "You sure?" } %>
+    </h2>
+<% end %>
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+<table class="table">
+  <tr>
+  	<th>Team Name</th>
+  	<td><%= @team.name %></td>
+  </tr>
+
+  <tr>
+    <th>Team Leader</th>
+    <td><%= @team.user.name %></td>
+  </tr>
+
+  <tr>
+    <th>Team Code</th>
+    <td><%= @team.code %></td>
+  </tr>
+
+
+  <tr>
+    <th>Team Members</th>
+    <td>
+      <center>
+      <ol>
+      <% @members.each do |m| %>
+            </center>
+
+        <li>
+
+          <% if current_user.admin? %>
+            <%= link_to m.name, m %>
+			      <%= button_to "Remove", {action: "remove",  user_id: m.id, team_id: @team} %>
+          <% else %>
+            <%= m.name %>
+          <% end %>
+        </li>
+      <% end %>
+		<% if current_user.admin? %>
+			<%= form_tag({action: :add_user, team_id: @team.id}) do %>
+				<%= select_tag(:user_name, options_for_select(@user_names)) %>
+				<%=	submit_tag("Add user") %>
+			<% end %>
+		<% end %>
+      </ol>
+
+    </td>
+  </tr>
+</table>
+
+</div>
+</div>

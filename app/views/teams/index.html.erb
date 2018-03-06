@@ -1,0 +1,25 @@
+<% provide(:title, 'All teams') %>
+<h1>All teams</h1>
+
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+<%= will_paginate %>
+
+<table class="tg"
+<th>
+<td><%=link_to "Team Name",teams_path(:sort => "name")%></td>
+<td>No. of Students</td>
+<td>Team Leader</td>
+
+<td><%=link_to "Project Assigned",teams_path(:sort => "assigned")%></td>
+<td>Options</td>
+
+
+</th> 
+  <%= render @teams %>
+</table>
+
+<%= will_paginate %>
+
+</div>
+</div>

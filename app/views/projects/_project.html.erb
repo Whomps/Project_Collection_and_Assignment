@@ -1,0 +1,19 @@
+<tr> <%#= "id=listitemproject_#{project.id}" %> 
+  <td><%= project.semester + " "  + project.year %></td>
+
+  <td><%= link_to project.title, project %></td>
+  <td><%= project.islegacy ? "Yes" : "No"  %></td>
+  <td><%= project.oncampus ? "Yes" : "No" %></td>
+  <% if current_user.admin? %>
+      <td><% linkvalue = project.approved? ? "Unapprove" : "Approve" %><%= link_to linkvalue, "#", :onclick=>"$(\'#edit_project_#{project.id}\').submit()", :id => "toggle_switch_#{project.id}" %></td>
+    <td><%= link_to "Edit", edit_project_path(project) %></td>
+    <td> <%= link_to "Delete", project, method: :delete,
+                                     data: { confirm: "You sure?" } %></td>
+    <%= form_for(project, url: toggle_project_path(project), remote: true) do |f| %>
+      <%= hidden_field_tag :id, project.id %>
+
+  <td><%= project.updated_at.localtime %></td>
+      <%= f.submit "Submit", :class => "hidden" %>
+    <% end %>
+  <% end %>
+</tr>

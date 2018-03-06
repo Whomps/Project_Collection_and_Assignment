@@ -1,0 +1,72 @@
+<% provide(:title, 'User Details') %>
+<h1>User Details</h1>
+<h2>  <% if current_user.admin? && !current_user?(@user) %>
+	<%= link_to "Edit", edit_user_path(@user) %>
+    | <%= link_to "Delete", @user, method: :delete,     
+                                  data: { confirm: "Are you sure you want to delete " + @user.name } %>
+    | 
+    <% if !@user.admin?%>
+    <%= link_to "Make Admin",  user_make_admin_path(@user),
+                                  data: { confirm: "This will give the user unlimited power. Sure? " } %>
+    
+    <% else %>
+     <%= link_to "Remove Admin",  user_make_admin_path(@user),
+                                  data: { confirm: "Revoke all administrator rights?" } %>
+    
+
+    <% end %>
+
+
+
+  <% end %>
+</h2>
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+<table class="table">
+  <tr>
+  	<th>Name</th>
+  	<td><%= @user.name %></td>
+  </tr>
+  <tr>
+  	<th>UIN</th>
+  	<td><%= @user.uin %></td>
+  </tr>
+    <tr>
+  	<th>Role</th>
+  	<td><%= @user.admin? ? 'Administrator' : 'Student'%></td>
+  </tr>
+  <tr>
+  	<th>Email ID</th>
+  	<td><%= @user.email %></td>
+  </tr>
+  <tr>
+  	<th>Semester</th>
+  	<td><%= @user.semester %></td>
+  </tr>
+  <tr>
+  	<th>Year</th>
+  	<td><%= @user.year %></td>
+  </tr>
+    <tr>
+  	<th>Course</th>
+  	<td><%= @user.course %></td>
+  </tr>
+  <tr>
+  	<th>Team</th>
+  	<% if !(@user.is_member_of).present?%>
+  	  <td>Currently not a member of any team</td>
+  	 <%else%>
+  	  <td><%=link_to (@user.is_member_of).name ,team_path(@user.is_member_of)%></td>
+  	 <% end %>
+
+
+  </tr>
+  <tr>
+  	<th>Gravatar</th>
+  	<td><%= gravatar_for @user %></td>
+  </tr>
+</table>
+
+</div>
+</div>

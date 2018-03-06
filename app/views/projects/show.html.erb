@@ -1,0 +1,108 @@
+<% provide(:title, 'Project Details') %>
+<h1>Project Details</h1>
+
+<% if current_user.admin? %>
+<h2><%= link_to "Edit", edit_project_path(@project) %>
+  | <%= link_to "Delete", @project, method: :delete,
+                                data: { confirm: "You sure?" } %>
+</h2>
+<% end %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+<table class="table">
+  <tr>
+  	<th>Title</th>
+  	<td><%= @project.title %></td>
+  </tr>
+   <tr>
+   <% if @owned %>
+  	<th>Proposed By</th>
+  	<td><%= @owner.name %></td>
+  <% end %>
+  </tr>
+    <tr>
+  	<th>Semester</th>
+  	<td><%= @project.semester + " "  + @project.year %> </td>
+  </tr>
+
+  <tr>
+  
+  	<th>Organization</th>
+  	<td><%= @project.organization %></td>
+  </tr>
+  <tr>
+  	<th>Contact</th>
+  	<td><%= @project.contact %></td>
+  </tr>
+  <tr>
+  <tr>
+  	<th>Created On</th>
+  	<td><%=@project.created_at.localtime %></td>
+  </tr>
+  	<th>Description</th>
+  	<td><%= @project.description %></td>
+  </tr>
+  <tr>
+  	<th>On Campus</th>
+  	<td><%= @project.oncampus? ? 'Yes':'No' %></td>
+  </tr>
+
+  <tr>
+  	<th>Is Legacy</th>
+  	<td><%= @project.islegacy? ? 'Yes':'No' %> 
+    
+    <% if @project.islegacy && @legacy_project!=nil %>
+    (<%= link_to @legacy_project.title, project_path(@project.legacy_id)%> )</td>
+    <% end %>
+  </tr>
+
+	<tr>
+  	<th>Team</th>
+
+    <% if @assignment!=nil %>
+  	<td><%=link_to @team.name, team_path(@team) %></td>
+
+    <% else %>
+    <td>Not assigned to any team yet </td>
+    <% end %>    
+
+  </tr>
+	<tr>
+  	<th>Members</th>
+  	<td>
+    <ol>
+
+    <% if current_user.admin? && @assignment!=nil%>
+    <% @members.zip(@member_ids).each do |value,id| %>
+    <li><%= link_to value, user_path(id) %></li>
+    <% end %>
+
+    <% elsif !current_user.admin? && @assignment!=nil%>
+    <% @members.zip(@member_ids).each do |value,id| %>
+    <li><%= value %></li>
+    <% end %>
+    <% else %>
+    N/A
+    <% end %>
+
+
+  <tr>
+  <th>Project Documentation</th>
+
+  	<td><%=link_to "View", project_documentation_path(@project) %></td>
+    
+  </tr>
+
+    </ol>
+    
+    </td>
+  </tr>
+  <tr>
+    <th>Approved</th>
+    <td><%= @project.approved? ? 'Yes':'No' %></td>
+  </tr>
+</table>
+
+</div>
+</div>

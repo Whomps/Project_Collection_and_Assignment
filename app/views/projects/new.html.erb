@@ -1,0 +1,83 @@
+<% provide(:title, 'Add a Project') %>
+
+<script type="text/javascript">
+
+jQuery(function(){
+
+$('.legacy_ip').hide();
+$(".toggle_legacy").change(function()
+{
+
+  if(!this.checked)
+  {
+
+  $('.legacy_ip').val('')
+  $('.legacy_ip').hide();
+  }
+
+
+  else
+  {
+
+  $('.legacy_ip').show();
+  }
+
+});
+});
+</script>
+
+<h1>Enter Project Proposal</h1>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <%= form_for(@project) do |f| %>
+
+            <%= render 'shared/error_messages', object: f.object %>
+
+            <%= f.label :title %>
+            <%= f.text_field :title, class: "form_control" %>
+
+            <%= f.label :organization %><br>
+            <%= f.text_field :organization, class: "form_control" %>
+
+            <%= f.label :contact %><br>
+            <%= f.text_area :contact, class: "form_control", rows: 4 %>
+            
+            <%= f.label :semester%>
+            <%= f.select :semester ,[['Fall', 'Fall'] ,['Spring' ,'Spring'] ,['Summer' ,'Summer']],:include_blank => {:semester => "Select Semester"} %>
+      
+            <%= f.label :year %>
+            <%= f.select :year, (2000..Time.now.year + 10).to_a, :include_blank => {:year => "Select year"} %>
+            
+            <%= f.label :description %><br>
+            <%= f.text_area :description, class: "form_control", rows: 8 %>
+
+            <%= f.label :oncampus , "*Is On-Campus ?"  ,  class: "checkbox inline"  do  %>
+            <%= f.check_box :oncampus, class: "form_control"  %>
+                    <span>Is On-Campus ?</span>
+                 <% end %>
+
+            </br>
+            <%= f.label :islegacy, "*Is Legacy Project ?" ,  class: "checkbox inline toggl" do%>
+            <%= f.check_box :islegacy, class: "form_control toggle_legacy" %>
+                    <span>Is Legacy Project ?</span>
+                 <% end %>
+
+            </br>
+            <%= f.label :legacy_id, "Legacy Project Link (optional)" , class: "legacy_ip"   %><br/>
+            <%= f.select :legacy_id, @options,  {:prompt=>"Select legacy project"}, {:class => "form_control legacy_ip"}%>
+            
+
+            <div class="col-md-6 col-md-offset-3">
+                <%= f.submit "Submit", class: "btn btn-primary" %>
+            </div>
+
+        <% end %>
+
+    </div>
+</div>
+
+<br/><br/> <br/>
+<i><b>*On-Campus  Project</i>: </b>
+A project whose customer location is reachable by the <a href="http://transport.tamu.edu/busroutes/" target="_blank">Texas A&M Bus Network.</a><br/>
+<i><b>*Legacy Project </i>: </b> A project which is already in production. The proposal is for the enhancement. <br/>

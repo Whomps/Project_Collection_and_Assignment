@@ -1,0 +1,26 @@
+<%# if @teams[user.id] != nil %>
+
+<tr>
+  <% if current_user.admin? && !current_user?(user) %>
+
+  <td><%= gravatar_for user, size: 40 %></td>
+  <td><%= user.uin %></td>
+  <td><%= link_to user.name, user %></td>
+
+
+    <% if @teams[user.id]!=nil%>
+    <td><%=link_to @teams[user.id][:name],team_path(@teams[user.id]) %></td>
+    
+    <%else%>
+    <td>Unassigned</td>
+    
+
+    <%end%>
+  
+  <td><%= link_to "Edit", edit_user_path(user) %>|<%= link_to "Delete", user, method: :delete,
+                                  data: { confirm: "You sure?" } %></td>
+  <% end %>
+</tr>
+
+
+<%# end %>

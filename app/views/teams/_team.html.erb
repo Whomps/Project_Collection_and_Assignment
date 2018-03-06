@@ -1,0 +1,13 @@
+<tr>
+
+  <td><%= link_to team.name, team %></td>
+  <td><%=@counts[team.id]%></td>
+  <% if current_user.admin?%>
+  <td><%=@leaders[team.id].name%></td>
+ 
+ 
+  <td><%=@status[team.id]%></td>
+	<td class="options"><%= link_to "Edit", edit_team_path(team) %>| <%= link_to "Delete", team, method: :delete,
+                                  data: { confirm: "You sure?" } %></td>
+  <% end %>
+</tr>

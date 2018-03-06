@@ -1,0 +1,65 @@
+<% provide(:title, 'Project Documentation') %>
+<h3>Documentation for <%= @project.title %></h3>
+<br><br>
+
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+
+
+<% if @documents.count > 0 %>
+
+
+<table class="document_records left">
+<tr>
+<th>Upload Date</th>
+<th>Description</th>
+<th>Document/Link</th>
+<th>Author</th>
+
+<% if @auth %>
+<th>Delete</th>
+<% end %>
+</tr>
+
+
+<% @documents.zip(@users).each do |doc, auser|%>
+<tr>
+<td><%= doc.created_at %></td>
+<td><%= doc.name %></td>
+
+<% if doc.is_file%>
+<td><%= link_to doc.filein_identifier ,doc.filein.url%></td>
+<% else %>
+<td><%=link_to doc.link, "http://#{doc.link}"  %>
+<% end %>
+
+<% if !auser[0].nil?%>
+<td><%= link_to auser[1], user_path(auser[0])  %></td>
+<% else %>
+<td><%= auser[1] %></td>
+<% end %>
+
+<% if @auth %>
+<td><%= link_to "Delete", documents_destroy_path(:id => doc.id, :project_id => doc.project_id)%>
+<% end %>
+</tr>
+<%end %>
+
+
+
+</table>
+
+
+
+<%else%>
+<p>Documentation Unavailable this project :( If this is your project, maybe you should add some!)</p>
+<%end%>
+
+</br></br>
+
+<% if @auth %>
+<h3> <%= link_to "Add/Upload documentation for this project", new_document_path(:project_id => @project.id) %> </h3>
+<% end %>
+
+</div>
+</div>

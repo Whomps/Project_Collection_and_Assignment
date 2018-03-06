@@ -1,0 +1,40 @@
+// Place all the styles related to the projects controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+* { 
+	margin: 0; 
+	padding: 0; 
+}
+body { 
+	font: 14px/1.4 Georgia, Serif; 
+}
+#page-wrap {
+	margin: 50px;
+}
+p {
+	margin: 20px 0; 
+}
+
+	/* 
+	Generic Styling, for Desktops/Laptops 
+	*/
+	table{ 
+		width: 100%; 
+		border-collapse: collapse; 
+	}
+	/* Zebra striping */
+	tr:nth-of-type(odd) { 
+		background: #eee; 
+	}
+	th.tg { 
+		background: #333; 
+		color: white; 
+		font-weight: bold; 
+	}
+	td, th { 
+		padding: 10px; 
+        border-right: 3px;
+		border: 1px solid #ccc; 
+		text-align: left; 
+	}

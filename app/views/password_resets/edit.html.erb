@@ -1,0 +1,22 @@
+<% provide(:title, 'Reset password') %>
+<h1>Reset password</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+   <%# concat "this is #{@user.inspect}" %>  
+   <%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
+      <%#= render 'shared/error_messages' %>
+
+      <%= hidden_field_tag :email, @user.email %>
+        <h2> New Password length must be more than 6 characters. </h2>
+      
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.label :password_confirmation, "Retype New Password" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+      <%= f.submit "Update password", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

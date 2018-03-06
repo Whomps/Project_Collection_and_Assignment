@@ -1,0 +1,45 @@
+<% provide(:title, 'All projects') %>
+
+
+<h1><%= @title %></h1>
+
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+
+
+<table>
+
+<tr>
+    <th>Created At</th>
+    <th>Proposal Title</th>
+    <th>Status </th>
+    <th>Actions</th>
+    
+</tr>
+
+
+<% @projects['Approved'].each do |project| %>
+
+<tr>
+<td><%= project.created_at %></td>
+<td><%= link_to project.title, project %></td>
+<td>Approved</td>
+<td>Contact Adminstrator</td>
+</tr>
+<% end %>
+
+<% @projects['Unapproved'].each do |project| %>
+
+<tr>
+<td><%= project.created_at %></td>
+<td><%= link_to project.title, project %></td>
+<td>Unapproved</td>
+    <td><%= link_to "Edit", edit_project_path(project) %> |  <%= link_to "Delete", project, :method => :delete,
+                                     data: { confirm: "You sure?" } %></td>
+</tr>
+<% end %>
+
+
+</table>
+</div>
+</div>

@@ -1,0 +1,52 @@
+<h1>My Project</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+<table class="table">
+  <tr>
+  	<th>Title</th>
+  	<td><%= @project.title %></td>
+  </tr>
+  <tr>
+  	<th>Organization</th>
+  	<td><%= @project.organization %></td>
+  </tr>
+  <tr>
+  	<th>Contact</th>
+  	<td><%= @project.contact %></td>
+  </tr>
+  <tr>
+  	<th>Description</th>
+  	<td><%= @project.description %></td>
+  </tr>
+  <tr>
+  	<th>On Campus</th>
+  	<td><%= @project.oncampus? ? 'Yes':'No' %></td>
+  </tr>
+  <tr>
+  	<th>Is Legacy</th>
+  	<td><%= @project.islegacy? ? 'Yes':'No' %> <%= link_to "(Legacy Details)",project_legacy_path(@project)%> </td>
+  </tr>
+	<tr>
+  	<th>Team</th>
+  	<td><%= @team.name %></td>
+  </tr>
+	<tr>
+  	<th>Members</th>
+  	<td><%= 
+					@members.each do |name|
+						puts name
+					end
+		%></td>
+  </tr>
+
+
+
+	<th> Documentation </th>
+	<td><%= link_to  "View" , project_documentation_path(@project) %></td>
+	</tr>
+</table>
+
+
+</div>
+</div>
