@@ -36,7 +36,9 @@ class StaticPagesController < ApplicationController
 		end
   end
   
-  def create
+  # This functionality has been partially repaired - no more crashes
+  # Actual NetID login may not work (CAS gem not working?)
+  def create # NetID login method
     user = User.find_by(email: params[:static_pages][:email].downcase)
     if user && user.authenticate(params[:static_pages][:password])
       log_in user
@@ -45,7 +47,7 @@ class StaticPagesController < ApplicationController
       # Log the user in and redirect to the user's show page.
     else
       # Create an error message.
-      flash.now[:danger] = 'Invalid email/password combination'
+      flash.now[:danger] = 'Invalid NetID/password combination'
       render 'new'
     end
   end

@@ -28,19 +28,26 @@ class AssignmentsController < ApplicationController
   end
   
   def assign
+    # Modify this to only pick teams and projects that do not have assignemnts yet
 
-    #Modify this to only pick teams and projects that do not have assignemnts yet
+    reserved_teams =  Assignment.all.collect{|x| x.team_id}
+    reserved_projects = Assignment.all.collect{|x| x.project_id}
 
-      reserved_teams =  Assignment.all.collect{|x| x.team_id}
-      reserved_projects = Assignment.all.collect{|x| x.project_id}
+    print(reserved_teams, reserved_projects)
 
-      print(reserved_teams, reserved_projects)
+    teams = Team.where.not(id: reserved_teams)
+    #projects = Project.where("approved = ? AND id NOT IN (?)", true, reserved_projects)
+	
+    # Handle admin sad path in case of "no teams created"
+    if teams.size < 2
+      flash[:danger] = "Cannot proceed with Assignment Algorithm, less than 2 teams exist."
+      redirect_to viewassign_path
+      return
+    end
 
-     teams = Team.where.not(id: reserved_teams)
-     #projects = Project.where("approved = ? AND id NOT IN (?)", true, reserved_projects)
+    projects = Project.where.not(id:  reserved_projects).where(approved: true)
 
-     projects = Project.where.not(id:  reserved_projects).where(approved: true)
-
+    # Handle admin sad path in case of "too few projects" 
     if teams.size > projects.size
       flash[:danger] = "Cannot proceed with Assignment Algorithm, Number of Unassigned Teams more than number of Approved and available Projects"
       redirect_to viewassign_path
@@ -73,7 +80,7 @@ class AssignmentsController < ApplicationController
         costMatrix[i][j] = infiniteCost
       end
     end
-    
+	
     # Call Munkres algorithm on the Cost Matrix
     m = Munkres.new(costMatrix)
     pairings = m.find_pairings

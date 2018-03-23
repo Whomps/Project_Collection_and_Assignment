@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
         before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy, :approve, :unapprove, :approved, :unapproved, :toggle]
         before_action :admin_user,     only: [:index, :edit, :update, :destroy, :approve, :unapprove, :unapproved, :toggle]
-        skip_before_filter :admin_user, only: [:destroy , :edit, :update]
+        skip_before_action :admin_user, only: [:destroy , :edit, :update]
         
         def index
                 @title = "all_projects"

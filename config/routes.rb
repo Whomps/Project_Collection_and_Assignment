@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         get    'contact' => 'static_pages#contact'
         get    'signup'  => 'users#new'
         get    'login_netid' => 'static_pages#new'
+		post   'login_netid' => 'static_pages#create'
         get    'login'   => 'sessions#new'
         post   'login'   => 'sessions#create'
         delete 'logout'  => 'sessions#destroy'
