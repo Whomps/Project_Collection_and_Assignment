@@ -21,12 +21,12 @@ module ProjectApp
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
-
     # Include the authenticity token in remote forms.
     config.action_view.embed_authenticity_token_in_remote_forms = true
 
+	# Disable spam of console when cannot render
+	config.web_console.whiny_requests = false
+	
     config.eager_load = true
   end
 end
