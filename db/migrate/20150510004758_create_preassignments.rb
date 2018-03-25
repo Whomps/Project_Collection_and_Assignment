@@ -1,4 +1,4 @@
-class CreatePreassignments < ActiveRecord::Migration
+class CreatePreassignments < ActiveRecord::Migration[5.1]
   def change
     create_table :preassignments do |t|
       t.integer :team_id

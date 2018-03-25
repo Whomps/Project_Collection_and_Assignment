@@ -65,4 +65,8 @@ ActionMailer::Base.smtp_settings = {
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  
+  # Disable spam of console when cannot render
+  config.web_console.whiny_requests = false
+  
 end

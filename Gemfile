@@ -28,9 +28,13 @@ group :development, :test do
 #  gem 'quiet_assets'	# Deprecated
   gem 'sqlite3' 
   gem 'byebug'
-  gem 'web-console'
+#  gem 'web-console'    # Moved to :development only
   gem 'spring'
 
+end
+
+group :development do
+  gem 'web-console'
 end
 
 group :test do

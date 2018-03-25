@@ -1,4 +1,4 @@
-class AddProjectDetailsToProjects < ActiveRecord::Migration
+class AddProjectDetailsToProjects < ActiveRecord::Migration[5.1]
   def change
 		add_column :projects, :iteration0, :string
 		add_column :projects, :iteration1, :string

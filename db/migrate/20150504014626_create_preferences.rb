@@ -1,4 +1,4 @@
-class CreatePreferences < ActiveRecord::Migration
+class CreatePreferences < ActiveRecord::Migration[5.1]
   def change
     create_table :preferences do |t|
       t.references :team, index: true

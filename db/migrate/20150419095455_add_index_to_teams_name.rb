@@ -1,4 +1,4 @@
-class AddIndexToTeamsName < ActiveRecord::Migration
+class AddIndexToTeamsName < ActiveRecord::Migration[5.1]
   def change
   	  add_index :teams, :name, unique: true
   end

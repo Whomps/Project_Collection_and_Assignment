@@ -1,4 +1,4 @@
-class RemovePartsFromProject < ActiveRecord::Migration
+class RemovePartsFromProject < ActiveRecord::Migration[5.1]
   def change
     remove_column :projects, :iteration0, :string
     remove_column :projects, :iteration0, :string

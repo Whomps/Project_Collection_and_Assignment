@@ -1,4 +1,4 @@
-class Semester < ActiveRecord::Migration
+class Semester < ActiveRecord::Migration[5.1]
   def change
   end
 end

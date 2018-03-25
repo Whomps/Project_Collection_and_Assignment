@@ -23,9 +23,6 @@ module ProjectApp
 
     # Include the authenticity token in remote forms.
     config.action_view.embed_authenticity_token_in_remote_forms = true
-
-	# Disable spam of console when cannot render
-	config.web_console.whiny_requests = false
 	
     config.eager_load = true
   end

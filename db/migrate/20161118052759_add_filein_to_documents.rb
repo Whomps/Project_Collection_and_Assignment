@@ -1,4 +1,4 @@
-class AddFileinToDocuments < ActiveRecord::Migration
+class AddFileinToDocuments < ActiveRecord::Migration[5.1]
   def change
     add_column :documents, :filein, :string
   end
