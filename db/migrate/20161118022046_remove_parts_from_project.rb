@@ -1,7 +1,6 @@
 class RemovePartsFromProject < ActiveRecord::Migration[5.1]
   def change
     remove_column :projects, :iteration0, :string
-    remove_column :projects, :iteration0, :string
     remove_column :projects, :iteration1, :string
     remove_column :projects, :iteration2, :string
     remove_column :projects, :iteration3, :string
