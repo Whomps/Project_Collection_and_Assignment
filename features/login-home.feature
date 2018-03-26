@@ -3,9 +3,9 @@ Feature: Login home page
     Scenario: Signup
       Given I am on signup_page
       And I fill in the following details:
-       |Name|admin|
+       |Name|admin1|
        |UIN|123456789|
-       |Email|karthi@karthik.com|
+       |Email|karthi1@karthik.com|
        |Password|karthi123|
        |Confirmation|karthi123|
        |Semester|Fall|
@@ -17,12 +17,12 @@ Feature: Login home page
       When I click "Home"
       Then I should visit home_page
   	  
-  	Scenario: Team tab
-  	   Given I am on signup_page
+  	Scenario: Team tab, logout
+  	  Given I am on signup_page
       And I fill in the following details:
-       |Name|admin|
+       |Name|admin2|
        |UIN|123456789|
-       |Email|karthi@karthik.com|
+       |Email|karthi2@karthik.com|
        |Password|karthi123|
        |Confirmation|karthi123|
        |Semester|Fall|
@@ -45,18 +45,44 @@ Feature: Login home page
   	  When I click "Create Team"
   	  Then I should visit createteam_page
   	  When I am on createteam_page
-  	  And I fill the teamm name:
+  	  And I fill the team name:
   	   |Name|Karthikkkkk|
-  	  When I press "Create team"
+  	  When I press "Create Team"
   	  Then I should visit myteam page
-  	  
-  	
-  	Scenario: Project tab
-  	   Given I am on signup_page
+	  When I click "Log Out"
+	  Then I should see "Welcome to the Project Submission and Assignment System"
+	  
+	Scenario: Create team, attempt leave team as leader, then delete team
+      Given I am on signup_page
       And I fill in the following details:
-       |Name|admin|
+       |Name|admin3|
        |UIN|123456789|
-       |Email|karthi@karthik.com|
+       |Email|karthi3@karthik.com|
+       |Password|karthi123|
+       |Confirmation|karthi123|
+       |Semester|Fall|
+       |Year|2016|
+       |Course|CSCE606|
+      When I press "Create my account"
+	  When I click "Create Team"
+  	  And I fill the team name:
+	   |Name|Team Leavers|
+	  When I press "Create Team"
+	  Then I should see "Team created successfully"
+	  And I should see "Team Details"
+	  And I should see "Team Leavers"
+	  When I click "Leave Team"
+	  Then I should see "Team leader cannot leave team"
+	  When I click "Delete"
+	  Then I should see "You are not yet part of any team"
+	  And I should see "User Details"
+	  
+  	Scenario: Project tab
+  	  Given I am on signup_page
+      And I fill in the following details:
+       |Name|admin4|
+       |UIN|123456789|
+       |Email|karthi4@karthik.com|
        |Password|karthi123|
        |Confirmation|karthi123|
        |Semester|Fall|
@@ -78,9 +104,9 @@ Feature: Login home page
   	Scenario: Account tab
   	  Given I am on signup_page
       And I fill in the following details:
-       |Name|admin|
+       |Name|admin5|
        |UIN|123456789|
-       |Email|karthi@karthik.com|
+       |Email|karthi5@karthik.com|
        |Password|karthi123|
        |Confirmation|karthi123|
        |Semester|Fall|
@@ -94,43 +120,37 @@ Feature: Login home page
       When I click "Update Profile"
       Then I should visit update_details
       And I fill the updated details:
-       |Name|karthi|
-       |Email|karthi@karthik.com|
+       |Name|karthi5a|
+       |Email|karthi5a@karthik.com|
        |Password|karth123|
        |Confirmation|karth123|
       When I press "Save changes"
       Then I should visit user_details page
-      When I click "Log out"
+      When I click "Log Out"
       Then I should visit home_page
-      
       
     Scenario: LoginNN
       Given I am on login_page
       And I fill in the details:
        |Email|master@example.com|
        |Password|adminadmin|
-      When I press "Log in"
+      When I press "Log In"
       Then I should visit user_details
-      
    
   Scenario: Test
       Given I am on projects
       Then I should see "Help"
     
-  Scenario: Forgot Password
+  Scenario: Sign up
       Given I am on login_page
       And I click "Sign up now!"
       Then I should visit the signup page
-    
-   
- 
   
-  Scenario: forgot password
+  Scenario: Forgot Password
     Given I am on login_page
     When I click "forgot password"
     Then I should visit forgot_password_page
     
-
   Scenario: Password Reset
     Given I am on forgot_password_page
     And I fill the mail id:
@@ -138,6 +158,5 @@ Feature: Login home page
     When I press "Submit"
     Then I should visit password_reset_page
    
- 
  Scenario: Remember me
    Given I am on login_page

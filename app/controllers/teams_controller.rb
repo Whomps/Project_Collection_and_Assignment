@@ -145,7 +145,7 @@ class TeamsController < ApplicationController
         end
         
         
-        flash[:success] = "Team created Successfully"
+        flash[:success] = "Team created successfully"
         redirect_to @team
       else
         render 'new'

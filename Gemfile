@@ -45,7 +45,7 @@ group :test do
   gem 'guard-minitest'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
-  gem 'simplecov', :require => false, :group => :test
+  gem 'simplecov', :require => false
 
 end
 
