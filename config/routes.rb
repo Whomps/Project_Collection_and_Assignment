@@ -91,7 +91,7 @@ Rails.application.routes.draw do
 		resources :assignments
 		post 'delete' => 'assignments#delete'
 		post 'add' => 'assignments#add'
-                post 'clear_all_data' => 'assignments#clearall'
+        post 'clear_all_data' => 'assignments#clearall'
 
 
         # The priority is based upon order of creation: first created -> highest priority.

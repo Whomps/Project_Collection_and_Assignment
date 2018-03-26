@@ -48,7 +48,8 @@ class UsersController < ApplicationController
   end
 
   def show
-		print("Params = " + params.to_s())
+	print("Params = " + params.to_s())
+	print("Inside User:show")
     @user = User.find(params[:id])
   end
   

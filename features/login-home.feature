@@ -114,10 +114,10 @@ Feature: Login home page
       
    
   Scenario: Test
-       Given I am on projects
-       Then I should see "Help"
+      Given I am on projects
+      Then I should see "Help"
     
-    Scenario: Forgot Password
+  Scenario: Forgot Password
       Given I am on login_page
       And I click "Sign up now!"
       Then I should visit the signup page

@@ -26,17 +26,18 @@ module SessionsHelper
 
         # Returns the current logged-in user (if any).
         def current_user
-                if (user_id = session[:user_id])
-                        @current_user ||= User.find_by(id: user_id)
-                elsif (user_id = cookies.signed[:user_id])
-                        #raise       # The tests still pass, so this branch is currently untested.
-                        user = User.find_by(id: user_id)
-                        if user && user.authenticated?(cookies[:remember_token])
-                                log_in user
-                                @current_user = user
-                        end
+            if (user_id = session[:user_id])
+                    @current_user ||= User.find_by(id: user_id)
+            elsif (user_id = cookies.signed[:user_id])
+                #raise       # The tests still pass, so this branch is currently untested.
+                user = User.find_by(id: user_id)
+                if user && user.authenticated?(cookies[:remember_token])
+                    log_in user
+                    @current_user = user
                 end
+		    end
         end
+
 
         # Returns true if the user is logged in, false otherwise.
         def logged_in?
@@ -84,9 +85,21 @@ module SessionsHelper
         end
 
         # Confirms the correct user.
+		# Derek Note: This section causes unnecessary database queries due to current_user?()
+		# It is possible to refactor this later so that current_user is only called once
         def correct_user
-                @user = User.find(params[:id])
-                redirect_to(root_url) unless current_user?(@user) || current_user.admin?
+            @user = User.find_by_id(params[:id])	# Changed to find_by_id to avoid exception when id not found
+			#redirect_to(root_url) unless current_user?(@user) || current_user.admin? # Replaced below
+			
+			# It is assumed some user is logged in here from the before_action filter
+			if @user.nil?    # Path 1: Cannot see user (DNE)
+				@user = User.find_by_id(session[:user_id]) # Set @user to the user logged in 
+			    flash[:warning] = "Cannot view user #{params[:id]} (does not exist, p1)"
+			    redirect_to(current_user)
+			elsif !current_user?(@user) && !@user.admin?  # Path 2: Cannot see user (not admin)
+			    flash[:warning] = "Cannot view user #{params[:id]} (insufficient permission, p2)"
+				redirect_to(current_user)
+			end                  # Path 3: We can see the user
         end
 
         # Confirms an admin user.
@@ -94,49 +107,48 @@ module SessionsHelper
                 redirect_to(root_url) unless current_user.admin?
         end
 
-                def have_permission?
-                        if !current_user?(@user) && !current_user.admin?
-                                flash[:warning] = "You have no right"
-                                redirect_to current_user
-                                return false
-                        else
-                                return true
-                        end
-                end
+        def have_permission?
+            if !current_user?(@user) && !current_user.admin?
+                flash[:warning] = "You have no right"
+                redirect_to current_user
+                return false
+            else
+                return true
+            end
+        end
 
-                def own?
-                        if @own == nil
-                                return false
-                        else
-                                return true
-                        end
-                end
+        def own?
+            if @own == nil
+                return false
+            else
+                return true
+            end
+        end
 
-                def have_team?
-                        if @relationship == nil
-                                flash[:warning] = "You still have no team"
-                                redirect_to current_user
-                                return false
-                        else
-                                return true
-                        end
-                end
+        def have_team?
+            if @relationship == nil
+                flash[:warning] = "You still have no team"
+                redirect_to current_user
+                return false
+            else
+                return true
+            end
+        end
 
-                def have_project?
+        def have_project?
+            if @assignment == nil
+                flash[:warning] = "Project has not been assigned"
+                redirect_to current_user
+                return false
+            else
+                return true
+            end
+        end
 
-                        if @assignment == nil
-                                flash[:warning] = "Project has not been assigned"
-                                redirect_to current_user
-                                return false
-                        else
-                                return true
-                        end
-                end
-
-                def upload_file(f)
-                        File.open(Rails.root.join('public', 'uploads', @team.id.to_s, f.original_filename.to_s), 'wb') do |file|
-                                file.write(f.read)
-                        end
-                        flash[:success] = f.original_filename.to_s + " uploaded"
-                end
+        def upload_file(f)
+            File.open(Rails.root.join('public', 'uploads', @team.id.to_s, f.original_filename.to_s), 'wb') do |file|
+                file.write(f.read)
+            end
+            flash[:success] = f.original_filename.to_s + " uploaded"
+        end
 end

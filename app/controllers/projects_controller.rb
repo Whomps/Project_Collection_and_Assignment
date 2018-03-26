@@ -227,7 +227,7 @@ class ProjectsController < ApplicationController
                                 flash[:danger] = "Failed to retrieve the peer evaluation form because the team is missing."
                                 @title = "Approved Projects"
                                 @projects = Project.where("approved = ?", true).paginate(page: params[:page])
-                                redirect_to :back
+                                redirect_back fallback_location: root_path    # Refactored for Rails 5
                                 return
                         end
                         @members = @team.members
