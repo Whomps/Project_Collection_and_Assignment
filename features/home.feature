@@ -16,8 +16,8 @@ Feature: Homepage
 		Then I should visit the help page
 
     Scenario: See Login Page
-        Given I am on home_page
-        When I click "Log In "
+        Given I am on about_page
+        When I click "Log In"
         Then I should visit the login page
            
     Scenario: See Login Page

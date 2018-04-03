@@ -14,7 +14,7 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2018-04-03T03:17:35+00:00">2018-04-03T03:17:35+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2018-04-03T03:32:50+00:00">2018-04-03T03:32:50+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,7 +25,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         10.07
+         10.06
        </span>
     </span> hits/line)
   </h2>
@@ -167,7 +167,7 @@
         <td>31</td>
         <td>17</td>
         <td>14</td>
-        <td>1.0</td>
+        <td>0.8</td>
       </tr>
       
       <tr>
@@ -277,7 +277,7 @@
         <td>80</td>
         <td>52</td>
         <td>28</td>
-        <td>17.7</td>
+        <td>17.6</td>
       </tr>
       
       <tr>
@@ -443,7 +443,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         10.46
+         10.45
        </span>
     </span> hits/line)
   </h2>
@@ -585,7 +585,7 @@
         <td>31</td>
         <td>17</td>
         <td>14</td>
-        <td>1.0</td>
+        <td>0.8</td>
       </tr>
       
       <tr>
@@ -804,7 +804,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         15.75
+         15.66
        </span>
     </span> hits/line)
   </h2>
@@ -916,7 +916,7 @@
         <td>80</td>
         <td>52</td>
         <td>28</td>
-        <td>17.7</td>
+        <td>17.6</td>
       </tr>
       
       <tr>
@@ -7680,20 +7680,20 @@
           <code class="ruby">  def new</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="19">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="2" data-linenumber="19">
+          <span class="hits">2</span>
           
           <code class="ruby">		email = session[:cas_user].to_s+&quot;@tamu.edu&quot;</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="20">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="2" data-linenumber="20">
+          <span class="hits">2</span>
           
           <code class="ruby">		user = User.find_by(email: email)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="21">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="2" data-linenumber="21">
+          <span class="hits">2</span>
           
           <code class="ruby">		if user</code>
         </li>
@@ -7722,20 +7722,20 @@
           <code class="ruby">		else</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="26">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="2" data-linenumber="26">
+          <span class="hits">2</span>
           
           <code class="ruby">			passwd = SecureRandom.hex</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="27">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="2" data-linenumber="27">
+          <span class="hits">2</span>
           
           <code class="ruby">			user = User.new(:name =&gt; &quot;Please Update&quot;, :email =&gt; email, :password_digest =&gt; passwd)	</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="28">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="2" data-linenumber="28">
+          <span class="hits">2</span>
           
           <code class="ruby">		  if user.save</code>
         </li>
@@ -7764,8 +7764,8 @@
           <code class="ruby">		  else</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="33">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="2" data-linenumber="33">
+          <span class="hits">2</span>
           
           <code class="ruby">		     render &#39;new&#39;</code>
         </li>
@@ -10583,8 +10583,8 @@
           <code class="ruby">        def current_user</code>
         </li>
       
-        <li class="covered" data-hits="522" data-linenumber="29">
-          <span class="hits">522</span>
+        <li class="covered" data-hits="521" data-linenumber="29">
+          <span class="hits">521</span>
           
           <code class="ruby">            if (user_id = session[:user_id])</code>
         </li>
@@ -10595,8 +10595,8 @@
           <code class="ruby">                    @current_user ||= User.find_by(id: user_id)</code>
         </li>
       
-        <li class="covered" data-hits="44" data-linenumber="31">
-          <span class="hits">44</span>
+        <li class="covered" data-hits="43" data-linenumber="31">
+          <span class="hits">43</span>
           
           <code class="ruby">            elsif (user_id = cookies.signed[:user_id])</code>
         </li>
@@ -10673,8 +10673,8 @@
           <code class="ruby">        def logged_in?</code>
         </li>
       
-        <li class="covered" data-hits="141" data-linenumber="44">
-          <span class="hits">141</span>
+        <li class="covered" data-hits="140" data-linenumber="44">
+          <span class="hits">140</span>
           
           <code class="ruby">                !current_user.nil?</code>
         </li>

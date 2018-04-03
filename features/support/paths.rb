@@ -73,6 +73,10 @@ module NavigationHelpers
     when /update_details/ then '/users/1/edit'
       
     when /myteam/ then '/teams'
+    
+    when /about_page/ then '/about'
+    
+    when /contact_page/ then '/contact'
       
     
     
