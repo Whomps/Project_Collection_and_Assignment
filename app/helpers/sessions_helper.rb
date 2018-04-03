@@ -96,7 +96,7 @@ module SessionsHelper
 				@user = User.find_by_id(session[:user_id]) # Set @user to the user logged in 
 			    flash[:warning] = "Cannot view user #{params[:id]} (does not exist, p1)"
 			    redirect_to(current_user)
-			elsif !current_user?(@user) && !@user.admin?  # Path 2: Cannot see user (not admin)
+			elsif !current_user?(@user) && !current_user.admin?  # Path 2: Cannot see user (not admin)
 			    flash[:warning] = "Cannot view user #{params[:id]} (insufficient permission, p2)"
 				redirect_to(current_user)
 			end                  # Path 3: We can see the user
