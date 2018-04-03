@@ -33,5 +33,3 @@ Feature: Homepage
 	Scenario: Github code
 	  Given I am on home_page
 	  Then I should see "Source code available at GitHub"
-	  When I click on "GitHub"
-	  Then I should visit "https://github.com/Whomps/Project_Collection_and_Assignment"

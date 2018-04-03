@@ -122,6 +122,7 @@ Feature: Login home page
       And I fill the updated details:
        |Name|karthi5a|
        |Email|karthi5a@karthik.com|
+       |UIN|123123123| 
        |Password|karth123|
        |Confirmation|karth123|
       When I press "Save changes"
