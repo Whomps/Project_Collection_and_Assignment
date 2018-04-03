@@ -31,7 +31,7 @@
                                 <li class="divider"></li>
                                 <li><%= link_to "Add Project Proposal", add_project_path %></li>
                                 <li><%#= link_to "Preassign Projects", preassign_path %></li>
-                                <li><%= link_to "Assign Projects", assign_path %></li>
+                                <li><%= link_to "Assign Projects", assign_path,  data: { confirm: "[WARNING] Are you sure you want to Assign Projects?\n" } %></li>
                                 <li><%= link_to "View Assignment", viewassign_path %></li>
                                 <li><%= link_to "Download Assignment", download_path , :confirm => "are you sure?" %></li>
                                 <li class="divider"></li>
