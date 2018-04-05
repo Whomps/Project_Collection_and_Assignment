@@ -16,7 +16,8 @@ gem 'jbuilder', '~>2.7'
 gem 'sdoc', group: :doc
 gem 'jquery-ui-rails', '~>6.0'
 gem 'rb-readline', '~>0.5'
-gem 'rubycas-client', :git => 'git://github.com/rubycas/rubycas-client.git'
+#gem 'rubycas-client', :git => 'git://github.com/rubycas/rubycas-client.git'
+gem 'rubycas-client', :git => 'https://github.com/rubycas/rubycas-client'
 gem 'munkres'
 gem 'carrierwave', '~>1.2'
 
@@ -46,6 +47,7 @@ group :test do
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
   gem 'simplecov', :require => false
+  gem 'rails-controller-testing'
 
 end
 
