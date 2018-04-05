@@ -54,7 +54,11 @@ module NavigationHelpers
    
     when /signup_page/ then '/signup'
       
-    when /user_details/ then '/users/1'
+#    when /user_details/ then '/users/1'
+    
+    when /wrong_user_details/ then '/users/383728'
+    
+    when /user_details/ then Users.current_user
       
     when /jointeam_page/ then '/jointeam'
     
@@ -70,7 +74,11 @@ module NavigationHelpers
       
     when /pest/ then '/peer_evaluation'
     
-    when /update_details/ then '/users/1/edit'
+#    when /update_details/ then '/users/1/edit'
+
+    when /update_details/ then Users.edit_user_path(current_user)
+    
+    when /wrong_update_details/ then '/users/383728/edit'
       
     when /myteam/ then '/teams'
     
