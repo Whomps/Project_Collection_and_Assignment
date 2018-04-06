@@ -12,10 +12,9 @@ Feature: Login home page
        |Year|2016|
        |Course|CSCE606|
       When I press "Create my account"
-      Then I should visit user_details
       Then I should see "User Details"
       When I click "Home"
-      Then I should visit home_page
+      Then I should see "Howdy admin1 !!"
   	  
   	Scenario: Team tab, logout
   	  Given I am on signup_page
@@ -29,26 +28,20 @@ Feature: Login home page
        |Year|2016|
        |Course|CSCE606|
       When I press "Create my account"
-      Then I should visit user_details
-      When I click "Team"
       When I click "My Team"
-  	  Then I should visit myteam page
-  	  Given I am on myteam page
+      Then I should see "You are not yet part of any team"
   	  When I click "Join Team"
-  	  Then I should visit jointeam_page
-  	  When I am on jointeam_page
   	  Then I should see "Join a Team"
-  	  When I click "Join Team"
-  	  Then I should visit myteam page
+  	  When I press "Join Team"
+      Then I should see "Code is wrong"
   	  #When I click "Leave Team"
   	  #Then I should visit home_page
   	  When I click "Create Team"
-  	  Then I should visit createteam_page
-  	  When I am on createteam_page
-  	  And I fill the team name:
+  	  Then I should see "Create a Team"
+  	  When I fill the team name:
   	   |Name|Karthikkkkk|
-  	  When I press "Create Team"
-  	  Then I should visit myteam page
+  	  Then I press "Create Team"
+  	  Then I should see "Team created successfully"
 	  When I click "Log Out"
 	  Then I should see "Welcome to the Project Submission and Assignment System"
 	  
@@ -64,6 +57,7 @@ Feature: Login home page
        |Year|2016|
        |Course|CSCE606|
       When I press "Create my account"
+      Then I should see "User Details"
 	  When I click "Create Team"
   	  And I fill the team name:
 	   |Name|Team Leavers|
@@ -89,17 +83,41 @@ Feature: Login home page
        |Year|2016|
        |Course|CSCE606|
       When I press "Create my account"
-      Then I should visit user_details
-      When I click "Project"
+      Then I should see "User Details"
       When I click "Approved Projects"
-  	  Then I should visit approved_projects
+  	  Then I should see "Approved Projects"
+      And I should see "Semester"
+      And I should see "Title"
+      And I should see "Legacy"
+      And I should see "On Campus"
       When I click "Add Project Proposal"
-      Then I should visit addproposal page
+      Then I should see "Enter Project Proposal"
+      And I should see "Title"
+      And I should see "Organization"
+      And I should see "Contact"
+      And I should see "Semester"
+      And I should see "Year"
+      And I should see "Description"
+      And I should see "Is On-Campus?"
+      And I should see "Is Legacy Project?"
       When I click "My Project Proposal"
-      Then I should visit myproposal page
+      Then I should see "My Proposals"
+      Then I should see "Created At"
+      Then I should see "Proposal Title"
+      Then I should see "Status"
+      Then I should see "Actions"
       When I click "View Assigned Project"
-      Then I should visit assignedpro page
+      Then I should see "You still have no team"
+      When I click "Create Team"
+      And I fill the team name:
+	   |Name|Team Assigner|
+      And I press "Create Team"
+      When I click "View Assigned Project"
+      Then I should see "Project has not been assigned"
       When I click "Peer Evaluation"
+      Then I should see "Peer Evaluation"
+      And I should see "assign a total score of 10"
+      And I should see "Member #1: admin4 **"
     
   	Scenario: Account tab
   	  Given I am on signup_page
@@ -113,12 +131,12 @@ Feature: Login home page
        |Year|2016|
        |Course|CSCE606|
       When I press "Create my account"
-      Then I should visit user_details
+      #Then I should visit user_details
       When I click "Account"
       When I click "View Profile"
-      Then I should visit user_details
+      #Then I should visit user_details
       When I click "Update Profile"
-      Then I should visit update_details
+      Then I should visit admin5's update details page
       And I fill the updated details:
        |Name|karthi5a|
        |Email|karthi5a@karthik.com|

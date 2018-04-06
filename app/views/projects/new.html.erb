@@ -52,15 +52,15 @@ $(".toggle_legacy").change(function()
             <%= f.label :description %><br>
             <%= f.text_area :description, class: "form_control", rows: 8 %>
 
-            <%= f.label :oncampus , "*Is On-Campus ?"  ,  class: "checkbox inline"  do  %>
+            <%= f.label :oncampus , "*Is On-Campus?"  ,  class: "checkbox inline"  do  %>
             <%= f.check_box :oncampus, class: "form_control"  %>
-                    <span>Is On-Campus ?</span>
+                    <span>Is On-Campus?</span>
                  <% end %>
 
             </br>
-            <%= f.label :islegacy, "*Is Legacy Project ?" ,  class: "checkbox inline toggl" do%>
+            <%= f.label :islegacy, "*Is Legacy Project?" ,  class: "checkbox inline toggl" do%>
             <%= f.check_box :islegacy, class: "form_control toggle_legacy" %>
-                    <span>Is Legacy Project ?</span>
+                    <span>Is Legacy Project?</span>
                  <% end %>
 
             </br>

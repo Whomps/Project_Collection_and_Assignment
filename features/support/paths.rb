@@ -55,10 +55,11 @@ module NavigationHelpers
     when /signup_page/ then '/signup'
       
 #    when /user_details/ then '/users/1'
+
+    when /^(.*)'s user details page$/i 
+        user_path(User.find_by(name: $1))
     
     when /wrong_user_details/ then '/users/383728'
-    
-    when /user_details/ then Users.current_user
       
     when /jointeam_page/ then '/jointeam'
     
@@ -76,7 +77,8 @@ module NavigationHelpers
     
 #    when /update_details/ then '/users/1/edit'
 
-    when /update_details/ then Users.edit_user_path(current_user)
+    when /^(.*)'s update details page/i 
+        edit_user_path(User.find_by(name: $1))
     
     when /wrong_update_details/ then '/users/383728/edit'
       

@@ -14,7 +14,7 @@
         <% mycounter = 1 %>
         <%= form_for(:peer_evaluation) do |f| %>
             <% @members.each do |member| %>
-                <div class="h3"> <%= label_tag "Member\##{mycounter} : " + member.name +
+                <div class="h3"> <%= label_tag "Member \##{mycounter}: " + member.name +
                                  ((member.id == current_user.id) ? " **" : "") %> </div>
                 <p/><p/><p/><p/><p/><p/>
 
