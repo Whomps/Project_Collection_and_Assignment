@@ -70,6 +70,7 @@ Then(/^I fill the updated details:$/) do |table|
   data = table.rows_hash
   fill_in "Name", :with => data['Name']
   fill_in "Email", :with => data['Email']
-  fill_in "Password", :with => data['Password']
-  fill_in "Confirmation", :with => data['Confirmation']
+  fill_in "UIN", :with => data['UIN']
+  fill_in "New Password", :with => data['New Password']
+  fill_in "Confirm Password", :with => data['Confirm Password']
 end

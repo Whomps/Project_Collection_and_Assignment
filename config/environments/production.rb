@@ -16,6 +16,7 @@ config.action_mailer.raise_delivery_errors = true
     :domain         => 'heroku.com',
     :enable_starttls_auto => true
   }
+  
   # Code is not reloaded between requests.
   config.cache_classes = true
 

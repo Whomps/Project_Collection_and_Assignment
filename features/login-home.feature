@@ -131,51 +131,90 @@ Feature: Login home page
        |Year|2016|
        |Course|CSCE606|
       When I press "Create my account"
-      #Then I should visit user_details
-      When I click "Account"
+      Then I should see "User Details"
       When I click "View Profile"
-      #Then I should visit user_details
+      Then I should see "User Details"
+      And I should see "admin5"
+      And I should see "Currently not a member of any team"
       When I click "Update Profile"
-      Then I should visit admin5's update details page
-      And I fill the updated details:
+      Then I should see "Update Profile"
+      And I should see "Name"
+      And I should see "Email"
+      And I should see "UIN"
+      And I should see "New"
+      And I should see "Confirm"
+      When I fill the updated details:
        |Name|karthi5a|
-       |Email|karthi5a@karthik.com|
+       |Email|karthi5a-changed@karthik.com|
        |UIN|123123123| 
-       |Password|karth123|
-       |Confirmation|karth123|
-      When I press "Save changes"
-      Then I should visit user_details page
+       |New Password|karth123|
+       |Confirm Password|karth123|
+      When I press "Save Changes"
+      Then I should see "Profile updated"
+      And I should see "User Details"
+      And I should see "karthi5a"
+      And I should see "karthi5a-changed@karthik.com"
+      And I should see "123123123"
       When I click "Log Out"
-      Then I should visit home_page
+      Then I should see "Welcome to the Project Submission and Assignment System"
       
     Scenario: LoginNN
-      Given I am on login_page
-      And I fill in the details:
+      Given I am on home_page
+      When I click "Log In (Local)"
+      Then I should see "Log in"
+      When I fill in the details:
+       |Email|master@example.com|
+       |Password|adminadmin|
+      And I press "Log In"
+      Then I should see "User Details"
+      And I should see "administrator"
+      And I should see "master@example.com"
+   
+    # This next scenario currently tests the workaround.
+    # Implement the real NetID login test once it works
+    Scenario: Login NetID
+      Given I am on home_page
+      When I click "Log In (NetID)"
+      Then I should see "Log in (NetID)"
+      When I fill in the details:
        |Email|master@example.com|
        |Password|adminadmin|
       When I press "Log In"
-      Then I should visit user_details
+      Then I should see "User Details"
+      And I should see "administrator"
+      And I should see "master@example.com"     
    
-  Scenario: Test
+    Scenario: Test
       Given I am on projects
       Then I should see "Help"
     
-  Scenario: Sign up
+    Scenario: Sign up
       Given I am on login_page
       And I click "Sign up now!"
-      Then I should visit the signup page
+      Then I should see "Sign Up"
+      And I should see "Name"
+      And I should see "UIN"
+      And I should see "Email"
+      And I should see "Password"
+      And I should see "Confirmation"
+      And I should see "Semester"
+      And I should see "Year"
+      And I should see "Course"
   
-  Scenario: Forgot Password
-    Given I am on login_page
-    When I click "forgot password"
-    Then I should visit forgot_password_page
+    Scenario: Forgot Password
+      Given I am on login_page
+      When I click "forgot password"
+      Then I should see "Forgot Password"
+      And I should see "Email"
     
-  Scenario: Password Reset
-    Given I am on forgot_password_page
-    And I fill the mail id:
-    |Email|master@example.com|
-    When I press "Submit"
-    Then I should visit password_reset_page
+    Scenario: Password Reset
+      Given I am on forgot_password_page
+      And I fill the mail id:
+       |Email|master@example.com|
+      When I press "Submit"
+      Then I should see "Email sent with password reset instructions"
+      And I should see "Welcome to the Project Submission and Assignment System"
    
- Scenario: Remember me
-   Given I am on login_page
+    # This was never implemented? Or just not tested?
+    Scenario: Remember me
+      Given I am on login_page

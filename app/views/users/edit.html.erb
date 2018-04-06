@@ -1,28 +1,28 @@
-<% provide(:title, "Edit user") %>
-<h1>Update profile:</h1>
+<% provide(:title, "Edit User") %>
+<h1>Update Profile:</h1>
 
 <div class="row">
   <div class="col-md-4 col-md-offset-4">
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :name %>
+      <%= f.label :name, 'Name' %>
       <%= f.text_field :name, class: 'form-control' %>
 
-      <%= f.label :email %>
+      <%= f.label :email, 'Email' %> 
       <%= f.email_field :email, class: 'form-control' %>
 
-      <%= f.label :UIN %>
+      <%= f.label :uin, 'UIN' %>
       <%= f.text_field :uin, class: 'form-control' %>
 
-      <%= f.label :password %>
+      <%= f.label :password, 'New Password' %>
       <%= f.password_field :password, class: 'form-control' %>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.label :password_confirmation, 'Confirm Password' %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
 
       <div class="col-md-6 col-md-offset-3">
-        <%= f.submit "Save changes", class: "btn btn-primary" %>
+        <%= f.submit "Save Changes", class: "btn btn-primary" %>
       </div>
     <% end %>
 
