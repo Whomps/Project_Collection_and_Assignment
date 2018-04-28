@@ -9,6 +9,15 @@ require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "pat
  	visit path_to(page_name)
  end
  
+ Then(/^I should be on (.+)$/) do |page_name|
+  current_path = URI.parse(current_url).path
+    if current_path.respond_to? :should
+      current_path.should == path_to(page_name)
+    else
+      assert_equal path_to(page_name), current_path
+    end
+  end
+ 
  Given(/^I am on (.+)$/) do |page_name|
  	visit path_to(page_name)
  end
@@ -46,6 +55,18 @@ Given(/^I fill in the following details:$/) do |table|
   select data['Year'], :from => 'Year'
   select data['Course'], :from => 'Course'
   
+end
+Given(/^I fill in the following project details:$/) do |table|
+  data = table.rows_hash
+  fill_in "Title", :with => data['Title']
+  fill_in "Organization", :with => data['Organization']
+  fill_in "Contact", :with => data['Contact']
+  select data['Semester'], :from => 'Semester'
+  select data['Year'], :from => 'Year'
+  fill_in "Description", :with => data['Description']
+  fill_in "Github link", :with => data['Github link']
+  fill_in "Heroku link", :with => data['Heroku link']
+  fill_in "Pivotal link", :with => data['Pivotal link']
 end
   
 Given(/^I fill the mail id:$/) do |table|

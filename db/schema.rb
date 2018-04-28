@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161204033650) do
+ActiveRecord::Schema.define(version: 20180428170010) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer "team_id"
@@ -74,6 +74,9 @@ ActiveRecord::Schema.define(version: 20161204033650) do
     t.string "semester"
     t.integer "legacy_id"
     t.string "year"
+    t.text "github_link"
+    t.text "pivotal_link"
+    t.text "heroku_link"
   end
 
   create_table "relationships", force: :cascade do |t|

@@ -87,6 +87,12 @@ module NavigationHelpers
     when /about_page/ then '/about'
     
     when /contact_page/ then '/contact'
+    
+    when /unapproved_projects_page/ then '/unapproved_projects'
+    when /add_projects_page/ then '/add_project'
+    when /myproposals_projects_page/ then '/myproposals_projects'
+      
+      
       
     
     

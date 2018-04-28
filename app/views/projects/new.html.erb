@@ -51,6 +51,15 @@ $(".toggle_legacy").change(function()
             
             <%= f.label :description %><br>
             <%= f.text_area :description, class: "form_control", rows: 8 %>
+            
+            <%= f.label :github_link %><br>
+            <%= f.text_area :github_link, class: "form_control", rows: 1 %>
+            
+            <%= f.label :pivotal_link %><br>
+            <%= f.text_area :pivotal_link, class: "form_control", rows: 1 %>
+            
+            <%= f.label :heroku_link %><br>
+            <%= f.text_area :heroku_link, class: "form_control", rows: 1 %>
 
             <%= f.label :oncampus , "*Is On-Campus?"  ,  class: "checkbox inline"  do  %>
             <%= f.check_box :oncampus, class: "form_control"  %>
@@ -64,8 +73,12 @@ $(".toggle_legacy").change(function()
                  <% end %>
 
             </br>
+            
+            
             <%= f.label :legacy_id, "Legacy Project Link (optional)" , class: "legacy_ip"   %><br/>
             <%= f.select :legacy_id, @options,  {:prompt=>"Select legacy project"}, {:class => "form_control legacy_ip"}%>
+            
+                
             
 
             <div class="col-md-6 col-md-offset-3">

@@ -348,7 +348,9 @@ class ProjectsController < ApplicationController
 
                         end                 
                 else
-                        render 'new'
+                        #render 'new'
+                        flash[:danger] = "ERROR: Missing required parameters"
+                        redirect_to add_project_path
                 end
         end
 
@@ -487,9 +489,9 @@ class ProjectsController < ApplicationController
         private
         def project_params
                 if current_user && current_user.admin?
-                        params.require(:project).permit(:title, :organization, :contact, :description, :oncampus, :islegacy, :approved, :semester, :year, :legacy_id)
+                        params.require(:project).permit(:title, :organization, :contact, :description, :oncampus, :islegacy, :approved, :semester, :year, :legacy_id, :github_link, :heroku_link, :pivotal_link)
                 else
-                        params.require(:project).permit(:title, :organization, :contact, :description, :oncampus, :islegacy, :semester, :year, :legacy_id)
+                        params.require(:project).permit(:title, :organization, :contact, :description, :oncampus, :islegacy, :semester, :year, :legacy_id, :github_link, :heroku_link, :pivotal_link)
                 end
         end
 end

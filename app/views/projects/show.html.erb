@@ -43,6 +43,18 @@
   	<th>Description</th>
   	<td><%= @project.description %></td>
   </tr>
+  </tr>
+  	<th>GitHub Link</th>
+  	<td><%=link_to @project.github_link,  @project.github_link if @project.github_link.present? %></td>
+  </tr>
+  </tr>
+  	<th>Pivotal Link</th>
+  	<td><%= link_to @project.pivotal_link,  @project.pivotal_link if @project.pivotal_link.present?%></td>
+  </tr>
+  </tr>
+  	<th>Heroku Link</th>
+  	<td><%= link_to @project.heroku_link,  @project.heroku_link if @project.heroku_link.present?%></td>
+  </tr>
   <tr>
   	<th>On Campus</th>
   	<td><%= @project.oncampus? ? 'Yes':'No' %></td>
