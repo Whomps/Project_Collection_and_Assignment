@@ -302,6 +302,12 @@ class ProjectsController < ApplicationController
                         @member_ids.each do |member| #TO aggregate the members of each team. But isn't an array clumsy?
                                 tmp = User.find(member.user_id.to_i)
                         @members << tmp.name.to_s
+                        
+                        if @team != nil
+                                if current_user.is_member?(@team)
+                                        @assigned_user = true
+                                end
+                        end
                 end
                 end
                 
@@ -359,6 +365,15 @@ class ProjectsController < ApplicationController
         
                 @opt = Project.all.order("title")
                 @options   =  @opt.collect{|p| [p.title, p.id]}
+                
+                owned = Own.find_by_project_id(params[:id])
+                @readonly_flag = true
+                if current_user.admin?
+                        @readonly_flag = false
+                end
+                if !owned.nil? && current_user.id == owned.user_id
+                        @readonly_flag = false
+                end
 
                 
                 

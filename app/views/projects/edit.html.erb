@@ -37,13 +37,13 @@ $(".toggle_legacy").change(function()
             <%= render 'shared/error_messages', object: f.object %>
 
             <%= f.label :title %>
-            <%= f.text_field :title, class: "form_control" %>
+            <%= f.text_field :title, :readonly => @readonly_flag, class: "form_controle" %>
 
             <%= f.label :organization %><br>
-            <%= f.text_field :organization, class: "form_control" %>
+            <%= f.text_field :organization, :readonly => @readonly_flag, class: "form_control" %>
 
             <%= f.label :contact %><br>
-            <%= f.text_area :contact, class: "form_control", rows: 4 %>
+            <%= f.text_area :contact, :readonly => @readonly_flag, class: "form_control", rows: 4 %>
             
             <%= f.label :semester%>
             <%= f.select :semester ,[['Fall', 'Fall'] ,['Spring' ,'Spring'] ,['Summer' ,'Summer']],:include_blank => {:semester => "Select Semester"} %>
@@ -52,27 +52,28 @@ $(".toggle_legacy").change(function()
             <%= f.select :year, (2000..Time.now.year + 10).to_a, :include_blank => {:year => "Select year"} %>
             
             <%= f.label :description %><br>
-            <%= f.text_area :description, class: "form_control", rows: 8 %>
+            <%= f.text_area :description, :readonly => @readonly_flag,class: "form_control", rows: 8 %>
             
             <%= f.label :github_link %><br>
             <%= f.text_area :github_link, class: "form_control", rows: 1 %>
             
             <%= f.label :pivotal_link %><br>
             <%= f.text_area :pivotal_link, class: "form_control", rows: 1 %>
+
             
             <%= f.label :heroku_link %><br>
             <%= f.text_area :heroku_link, class: "form_control", rows: 1 %>
 
             <%= f.label :oncampus , "*Is On-Campus ?" %><br/>
-            <%= f.check_box :oncampus, class: "form_control" %>
+            <%= f.check_box :oncampus, :readonly => @readonly_flag, class: "form_control" %>
 
             <br/><br/>
 
             <%= f.label :islegacy, "*Is Legacy Project ?" %><br/>
-            <%= f.check_box :islegacy, class: "form_control toggle_legacy"  %>
+            <%= f.check_box :islegacy, :readonly => @readonly_flag, class: "form_control toggle_legacy"  %>
             
             </br>
-            <%= f.label :legacy_id, "Legacy Project Link (optional)" , class: "legacy_ip"   %><br/>
+            <%= f.label :legacy_id, "Legacy Project Link (optional)" , :readonly => @readonly_flag, class: "legacy_ip"   %><br/>
             <%= f.select :legacy_id, @options,  {:prompt=>"Select legacy project"}, {:class => "form_control legacy_ip"}%>
             
             
