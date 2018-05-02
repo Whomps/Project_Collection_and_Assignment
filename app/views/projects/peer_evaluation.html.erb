@@ -20,11 +20,11 @@
 
                 <%= "* \Q1. Score" %>
                 <%= f.text_field "#{member.id.to_s}.score", :type => "number", :min => 0, :step => 1, :max => @members.size * 10 , :required => true,
-                :value => ((not @current_pe.nil? and not @current_pe.empty?) ? @current_pe["#{member.id.to_s}"]["score"] : "") %>
+                :value => ((@current_pe_valid and not @current_pe["#{member.id.to_s}"].nil?) ? @current_pe["#{member.id.to_s}"]["score"] : "") %>
 
                 <%= "* \Q2. Comments" %>
                 <%= f.text_area "#{member.id.to_s}.comment", :class => "form_control", :rows => 4, :required => true, :minlength => 10,
-                    :value => ((not @current_pe.nil? and not @current_pe.empty?) ? @current_pe["#{member.id.to_s}"]["comment"] : "")%>
+                    :value => ((@current_pe_valid and not @current_pe["#{member.id.to_s}"].nil?) ? @current_pe["#{member.id.to_s}"]["comment"] : "")%>
                 <hr>
                 <% mycounter += 1%>
             <% end %>

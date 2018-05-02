@@ -10,6 +10,7 @@
   	<%= render 'preference_selector', :project => project, :team => @team %>
   <% end %>
 </ul>
+<h2><%=button_to('Submit Final Preferences', set_preference_path, { confirm: "Are You sure?" })  %></h2>
 
 </div>
 </div>

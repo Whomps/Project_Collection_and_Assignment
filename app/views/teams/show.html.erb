@@ -32,7 +32,10 @@
     <td><%= @team.code %></td>
   </tr>
 
-
+  <tr>
+    <th>Project Preferences Filled?</th>
+    <td><%= @team.preferences_filled %></td>
+  </tr>
   <tr>
     <th>Team Members</th>
     <td>
@@ -47,7 +50,7 @@
             <%= link_to m.name, m %>
 			      <%= button_to "Remove", {action: "remove",  user_id: m.id, team_id: @team} %>
           <% else %>
-            <%= m.name %>
+            <%= link_to m.name, m %>
           <% end %>
         </li>
       <% end %>

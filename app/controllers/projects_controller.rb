@@ -216,6 +216,8 @@ class ProjectsController < ApplicationController
 
                         p "*******************************"
                         p @current_pe
+                        
+                        @current_pe_valid = (not @current_pe.nil? and not @current_pe.empty?)? true : false
 
                         # @title = "Unapproved Projects"
                         the_user = User.find_by(id: the_user_id)

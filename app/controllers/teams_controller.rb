@@ -7,6 +7,12 @@ class TeamsController < ApplicationController
   def preference
     @team = current_user.is_member_of
     if @team
+      
+      if @team.preferences_filled?
+        flash[:warning] = "Preferences have already been submitted"
+        redirect_to current_user
+        return
+      end
       @title = "Preference Selector"
       @projects = Project.where("approved = ?", true)
       render 'preference'
@@ -21,12 +27,14 @@ class TeamsController < ApplicationController
       @counts = Hash.new
       @leaders = Hash.new
       @status  = Hash.new
+      @preferences = Hash.new
       @teams = Team.all
 
       @teams.each do |team|
         count = (Relationship.where(team_id:team.id).count)  
         @counts[team.id]  =  count
         @leaders[team.id] = team.leader
+        @preferences[team.id] = (team.preferences_filled)? '&#9989;' : "&#10060;"
         @status[team.id] =  ((Assignment.where(:team_id => team.id).blank?) ? "No" : "Yes")
         end #end do
 
@@ -102,6 +110,19 @@ class TeamsController < ApplicationController
 		redirect_to teams_path
 	end
 
+  def set_preference
+    @team = current_user.is_member_of
+    
+    if @team
+      @team.preferences_filled = true
+      @team.save!
+      flash[:success] = 'Preferences Saved'
+      redirect_to current_user
+    else
+      redirect_to current_user
+    end
+  end
+  
 	def add_user
 		usr = User.find_by_name(params[:user_name].to_s)
 		on_team = Relationship.find_by_user_id(usr.id)
@@ -184,7 +205,7 @@ class TeamsController < ApplicationController
  
  private
     def team_params
-      params.require(:team).permit(:name)
+      params.require(:team).permit(:name, :preferences_filled)
     end
 
     def team_leader

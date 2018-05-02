@@ -65,6 +65,7 @@ Rails.application.routes.draw do
         resources :teams
 		post 'remove' => 'teams#remove'
 		post 'add_user' => 'teams#add_user'
+		post 'set_preference' => 'teams#set_preference'
 
         resources :teams do
                 member do
