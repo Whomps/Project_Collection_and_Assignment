@@ -382,7 +382,7 @@ class ProjectsController < ApplicationController
         def update
                 @project = Project.find(params[:id])
                 
-                if @project.update_attributes(project_params)
+                if @project.update_attributes!(project_params)  # last minute change to allow git and pt saves
                         flash[:success] = "Project details updated"
                         redirect_to @project
                 else
