@@ -18,7 +18,6 @@ class UsersController < ApplicationController
 		@users.each do |user|
 			res = Relationship.find_by_user_id(user.id)
 			if res!=nil
-			print(res.inspect)
 				@teams[user.id] =  Team.find_by_id(res.team_id)
 			else
 				@teams[user.id]  = nil
@@ -48,8 +47,6 @@ class UsersController < ApplicationController
   end
 
   def show
-	print("Params = " + params.to_s())
-	print("Inside User:show")
     @user = User.find(params[:id])
   end
   

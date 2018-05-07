@@ -33,8 +33,6 @@ class AssignmentsController < ApplicationController
     reserved_teams =  Assignment.all.collect{|x| x.team_id}
     reserved_projects = Assignment.all.collect{|x| x.project_id}
 
-    print(reserved_teams, reserved_projects)
-
     teams = Team.where.not(id: reserved_teams)
     #projects = Project.where("approved = ? AND id NOT IN (?)", true, reserved_projects)
 	

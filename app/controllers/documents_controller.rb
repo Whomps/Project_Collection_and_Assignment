@@ -3,10 +3,6 @@ class DocumentsController < ApplicationController
   end
 
   def new
-        print("\n\nHello\n")
-        print(params)
-
-        print("\nBye\n\n")
   	        @project = Project.find(params[:project_id])
             @document = Document.new
             @options = [["Link", "link"], ["File Upload", "file"]]
@@ -46,7 +42,6 @@ class DocumentsController < ApplicationController
   end
 
   def destroy
-    print(params)
     Document.find(params[:id]).destroy
     flash[:success] = "Document deleted"
     redirect_to project_documentation_path(params[:project_id])

@@ -10,7 +10,7 @@ class TeamsController < ApplicationController
       
       if @team.preferences_filled?
         flash[:warning] = "Preferences have already been submitted"
-        redirect_to current_user
+        redirect_to user_path
         return
       end
       @title = "Preference Selector"
@@ -43,9 +43,6 @@ class TeamsController < ApplicationController
   	if !session.key?(:assignorder)
 		  session[:assignorder] = true
 		end
-
-    print(session[:assignorder])
-    print("\n\nHello\n\n")
 
 		if @sorting == "assigned"
 			unassigned_teams = @teams.select{|x| @status[x.id] == "No"}
@@ -126,8 +123,7 @@ class TeamsController < ApplicationController
 	def add_user
 		usr = User.find_by_name(params[:user_name].to_s)
 		on_team = Relationship.find_by_user_id(usr.id)
-
-    print(params)
+		
 		if on_team != nil
 			flash[:error] = "This user is already on a team"
 			redirect_to teams_path

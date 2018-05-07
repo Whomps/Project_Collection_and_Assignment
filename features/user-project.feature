@@ -1,22 +1,24 @@
-Feature: Project page features
+Feature: User Project features
   
   	  Background: User is logged_in
-  	  Given I am on signup_page
-      And I fill in the following details:
-       |Name|admin1|
-       |UIN|123456789|
-       |Email|karthi1@karthik.com|
-       |Password|karthi123|
-       |Confirmation|karthi123|
-       |Semester|Fall|
-       |Year|2016|
-       |Course|CSCE606|
-      When I press "Create my account"
-      Then I should see "User Details"
-      When I click "Home"
-      Then I should see "Howdy admin1 !!"
-      
-      
+      Given a user
+      | Name         | UserAccount        |
+      | Email        | ak@tamu.edu    |
+      | UIN | 111111111 |
+      Given an admin
+      | Name         | AdminAccount        |
+      | Email        | akapale@tamu.edu    |
+      Given a user
+      | Name         | User2Account        |
+      | Email        | ak2@tamu.edu    |
+      | UIN | 111111112 |
+      And I am logged in as:
+      | Email        | ak@tamu.edu    |
+      Then I should be on UserAccount's user details page
+      Given there exists a project
+      |Title|ProjectA|
+
+    
   	  Scenario: Create Project Proposal (sad path)
   	  Given I am on home_page
   	  When I click "Projects"
@@ -25,12 +27,9 @@ Feature: Project page features
       When I press "Submit"
       Then I should be on add_projects_page
       Then I should see "ERROR: Missing required parameters"
-      #Then I should see "Project Added for Approval"
       
      Scenario: Create Project Proposal (happy path)
-  	  Given I am on home_page
-  	  When I click "Projects"
-     When I click "Add Project Proposal"
+  	  Given I am on add_projects_page
      Then I should see "Enter Project Proposal"
      And I fill in the following project details:
       |Title|My Project Name|
@@ -48,9 +47,7 @@ Feature: Project page features
      Then I should see "My Project Name"
      
      Scenario: Check github/heroku/pivotal links
-  	  Given I am on home_page
-  	  When I click "Projects"
-     When I click "Add Project Proposal"
+  	  Given I am on add_projects_page
      Then I should see "Enter Project Proposal"
      And I fill in the following project details:
       |Title|Project1234|
@@ -70,3 +67,21 @@ Feature: Project page features
      Then I should see "GitHub Link"
      And I should see "Pivotal Link"
      And I should see "Heroku Link"
+     
+     Scenario: Peer Evaluation (sad case)
+       Given I am on home_page
+       When  I click "Peer Evaluation"
+       Then I should see "Failed to retrieve the peer evaluation form because the team is missing."
+       
+     Scenario: Peer Evaluation (happy case)
+       When I am on home_page
+       And I create a team
+        |Name|Navi2|
+       And I click "Peer Evaluation"
+       #And I should see "aasas"
+       And I fill the peer evaluation:
+       |Score |10|
+       | Comments|'Great work by him'|
+       And I press "Submit"
+       Then I should see "Peer evaluation results have been saved."
+       And I should be on pest

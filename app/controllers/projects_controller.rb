@@ -57,8 +57,6 @@ class ProjectsController < ApplicationController
 
                        p = Project.find(owned_proj.project_id)
 
-                     
-                     print(p.inspect)
                 
                        if(p.approved?)
                                @projects["Approved"]<< p
@@ -68,7 +66,6 @@ class ProjectsController < ApplicationController
 
                 end
 
-                print(@projects)
 
         end
 
@@ -456,7 +453,7 @@ class ProjectsController < ApplicationController
                 #If current user is a member of this team
                 @auth = (@member_ids.empty?)?false:true
         end
-
+=begin Commenting as this code is not in use currently
         def approve
                 project = Project.find_by(id: params[:id])
                 if project
@@ -492,6 +489,7 @@ class ProjectsController < ApplicationController
                         redirect_to root_url
                 end
         end
+=end
 
         def toggle
                 @project = Project.find(params[:id])

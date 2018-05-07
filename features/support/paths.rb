@@ -59,6 +59,15 @@ module NavigationHelpers
     when /^(.*)'s user details page$/i 
         user_path(User.find_by(name: $1))
     
+    when /^(.*)'s user edit page$/i 
+        edit_user_path(User.find_by(name: $1))
+        
+    when /^(.*)'s project details page$/i 
+        project_path(Project.find_by(title: $1))
+        
+    when /^(.*)'s project edit page$/i 
+        edit_project_path(Project.find_by(title: $1))
+        
     when /wrong_user_details/ then '/users/383728'
       
     when /jointeam_page/ then '/jointeam'
@@ -73,24 +82,39 @@ module NavigationHelpers
       
     when /assignedpro/ then '/projects/'
       
+    when /assign_projects_path/ then '/viewassign'
+      
     when /pest/ then '/peer_evaluation'
+    when /reset_database_page/ then '/resetDB'
+    when /download/ then '/download'
     
 #    when /update_details/ then '/users/1/edit'
 
     when /^(.*)'s update details page/i 
         edit_user_path(User.find_by(name: $1))
     
+    when /^(.*)'s update team page/i 
+        edit_team_path(Team.find_by(name: $1))
+    
+    when /^(.*)'s team details page/i 
+        team_path(Team.find_by(name: $1))
+        
     when /wrong_update_details/ then '/users/383728/edit'
       
     when /myteam/ then '/teams'
+    when /teams/ then '/teams'
+    when /users_page/ then '/users'
     
     when /about_page/ then '/about'
     
     when /contact_page/ then '/contact'
+      
+    when /help_page/ then '/help'
     
     when /unapproved_projects_page/ then '/unapproved_projects'
     when /add_projects_page/ then '/add_project'
     when /myproposals_projects_page/ then '/myproposals_projects'
+    when /peer_evaluation_page/ then '/peer_evaluation'
       
       
       

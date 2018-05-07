@@ -15,6 +15,23 @@ Feature: Login home page
       Then I should see "User Details"
       When I click "Home"
       Then I should see "Howdy admin1 !!"
+      
+    Scenario: Signup and Remember Me Feature
+      Given an admin
+      | Name         | AdminAccount|
+      |Email|master@example.com|
+       |Password|adminadmin|
+      When I am on home_page
+      And I should see "Log In (Local)"
+      When I click "Log In (Local)"
+      And I fill in the following login details:
+      |Email|master@example.com|
+       |Password|adminadmin|
+      Then I should see "Remember me on this computer"
+      And I check "Remember me on this computer"
+      When I press "Log In"
+      Then I should see "User Details"
+      #Need to add code to simulate closing browswer and actual testing remember me
   	  
   	Scenario: Team tab, logout
   	  Given I am on signup_page
@@ -90,6 +107,8 @@ Feature: Login home page
       And I should see "Title"
       And I should see "Legacy"
       And I should see "On Campus"
+      Then I click "Semester"
+      Then I click "Title"
       When I click "Add Project Proposal"
       Then I should see "Enter Project Proposal"
       And I should see "Title"
@@ -159,20 +178,28 @@ Feature: Login home page
       Then I should see "Welcome to the Project Submission and Assignment System"
       
     Scenario: LoginNN
-      Given I am on home_page
-      When I click "Log In (Local)"
+      Given an admin
+      | Name         | AdminAccount|
+      |Email|master@example.com|
+       |Password|adminadmin|
+      When I am on home_page
+      And I click "Log In (Local)"
       Then I should see "Log in"
       When I fill in the details:
        |Email|master@example.com|
        |Password|adminadmin|
       And I press "Log In"
       Then I should see "User Details"
-      And I should see "administrator"
+      And I should see "AdminAccount"
       And I should see "master@example.com"
    
     # This next scenario currently tests the workaround.
     # Implement the real NetID login test once it works
     Scenario: Login NetID
+      Given an admin
+      | Name         | AdminAccount|
+      |Email|master@example.com|
+       |Password|adminadmin|
       Given I am on home_page
       When I click "Log In (NetID)"
       Then I should see "Log in (NetID)"
@@ -181,7 +208,7 @@ Feature: Login home page
        |Password|adminadmin|
       When I press "Log In"
       Then I should see "User Details"
-      And I should see "administrator"
+      And I should see "AdminAccount"
       And I should see "master@example.com"     
    
     Scenario: Test
@@ -207,7 +234,18 @@ Feature: Login home page
       Then I should see "Forgot Password"
       And I should see "Email"
     
-    Scenario: Password Reset
+    Scenario: Password Reset (Sad case)
+      Given I am on forgot_password_page
+      And I fill the mail id:
+       |Email|master@example.com|
+      When I press "Submit"
+      Then I should see "Email address not found"
+    
+    Scenario: Password Reset (Happy case)
+      Given an admin
+      | Name         | AdminAccount|
+      |Email|master@example.com|
+       |Password|adminadmin|
       Given I am on forgot_password_page
       And I fill the mail id:
        |Email|master@example.com|

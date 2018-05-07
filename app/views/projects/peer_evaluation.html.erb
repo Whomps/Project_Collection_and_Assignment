@@ -18,11 +18,11 @@
                                  ((member.id == current_user.id) ? " **" : "") %> </div>
                 <p/><p/><p/><p/><p/><p/>
 
-                <%= "* \Q1. Score" %>
+                <%= f.label :score%>
                 <%= f.text_field "#{member.id.to_s}.score", :type => "number", :min => 0, :step => 1, :max => @members.size * 10 , :required => true,
                 :value => ((@current_pe_valid and not @current_pe["#{member.id.to_s}"].nil?) ? @current_pe["#{member.id.to_s}"]["score"] : "") %>
 
-                <%= "* \Q2. Comments" %>
+                <%= f.label :comments%>
                 <%= f.text_area "#{member.id.to_s}.comment", :class => "form_control", :rows => 4, :required => true, :minlength => 10,
                     :value => ((@current_pe_valid and not @current_pe["#{member.id.to_s}"].nil?) ? @current_pe["#{member.id.to_s}"]["comment"] : "")%>
                 <hr>
